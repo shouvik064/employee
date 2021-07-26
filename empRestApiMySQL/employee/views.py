@@ -57,13 +57,3 @@ def employee_detail(request, pk):
     elif request.method == 'DELETE': 
         employee.delete() 
         return JsonResponse({'message': 'Employee was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
-    
-        
-@api_view(['GET'])
-def employee_list_published(request):
-    employee = Employee.objects.filter(published=True)
-        
-    if request.method == 'GET': 
-        employee_serializer = EmployeeSerializer(employee, many=True)
-        return JsonResponse(employee_serializer.data, safe=False)
-    
